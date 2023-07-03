@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 4210157123753652}
   - component: {fileID: 95898481864777010}
   - component: {fileID: 1778219911}
+  - component: {fileID: 7005273393524690553}
   m_Layer: 0
   m_Name: sword_man
   m_TagString: Untagged
@@ -269,11 +270,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5928455f380d63419121c4b9471bf7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthBar: {fileID: 0}
   _maxHealth: 50
   _isPlayer: 0
-  _healthBarParent: {fileID: 0}
-  _healthBarPrefab: {fileID: 8940518593760930563, guid: 40a5420cf05edc04ba1c2371705e5c03, type: 3}
-  _healthBarPosition: {fileID: 1766205854}
+--- !u!114 &7005273393524690553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290715225530138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c900d84c431a11a418a951d01900fb68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activedSpellParent: {fileID: 0}
+  _activedSpellPrefab: {fileID: 9015332354042942527, guid: 42aa2f41e42cc2b42943c406f1e5f57c, type: 3}
+  _announcer: {fileID: 0}
+  _enemy: {fileID: 0}
 --- !u!1 &1315759352830414
 GameObject:
   m_ObjectHideFlags: 0
