@@ -6,7 +6,6 @@ namespace Client
     [RequireComponent(typeof(CharacterHealth))]
     public class SpellUser : MonoBehaviour
     {
-        [SerializeField] private Transform _activedSpellParent;
         [SerializeField] private ActivedSpell _activedSpellPrefab;
 
         [SerializeField] private SpellAnnouncer _announcer;
@@ -56,6 +55,7 @@ namespace Client
 
         private void Attack(Spell spell)
         {
+            _enemy.TakeDamage(spell.Value);
             CreateSpellAnnouncement(spell);
         }
 
@@ -78,13 +78,16 @@ namespace Client
         {
             CreateSpellAnnouncement(spell);
         }
-
+            
         private void CreateSpellAnnouncement(Spell spell)
         {
-            Debug.Log($"{spell.Type} {gameObject.name}");
-            var activedSpell = Instantiate(_activedSpellPrefab, _activedSpellParent);
+            ActivedSpell activedSpell;
+            Transform targetPosition = spell.Type == SpellType.Fireball ? _enemy.ActivedSpellParent : _current.ActivedSpellParent;
+
+            activedSpell = Instantiate(_activedSpellPrefab, targetPosition);
             activedSpell.Initialize(spell);
             UseSpell?.Invoke();
+            Debug.Log($"{spell.Type} {gameObject.name}");
         }
     }
 }

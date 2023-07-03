@@ -59,7 +59,7 @@ namespace Client
             if (_aISpellChooser == null)
                 _aISpellChooser = _enemy.GetComponent<AISpellChooser>();
 
-            _aISpellChooser.ChooseRandomSpell();
+            StartCoroutine(_aISpellChooser.ChooseRandomSpell());
         }
     }
 }

@@ -18,6 +18,9 @@ namespace Server
 
             _health -= damage;
 
+            if (_health <= 0)
+                _health = 0;
+
             return true;
         }
     }

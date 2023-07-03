@@ -6,15 +6,14 @@ namespace Client
 {
     public class CharacterHealth : MonoBehaviour
     {
-        [SerializeField] private HealthBar _healthBar;
-        
-        [SerializeField] private bool _isPlayer;
+        [SerializeField] private CharacterInfo _info;
 
         private float _health;
         private float _maxHealth;
 
         private WebCharacterHealth _webHealth;
 
+        public Transform ActivedSpellParent => _info.ActivedSpellParent;
         public float CurrentHealth => _health;
         public float MaxHealth => _maxHealth;
 
@@ -25,26 +24,24 @@ namespace Client
             _webHealth = new WebCharacterHealth();
             _webHealth.GetHealth(out _health, out _maxHealth);
 
-            _healthBar.Initialize(this);
+            _info.HealthBar.Initialize(this);
         }
 
         public void TakeDamage(float damage)
         {
             bool result = _webHealth.TryTakeDamage(damage);
             _webHealth.GetHealth(out _health, out _maxHealth);
+            HealthChanged?.Invoke();
 
             if (result == true)
                 return;
 
             if (_health <= 0)
                 Die();
-
-            HealthChanged?.Invoke();
         }
 
         private void Die()
         {
-            _health = 0;
             Debug.Log("Die");
         }
     }
