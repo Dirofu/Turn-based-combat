@@ -7,6 +7,11 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Slider _slider;
     [SerializeField] private TMP_Text _value;
 
+    [Header("Bar Settings")]
+    [SerializeField] private Image _bar;
+    [SerializeField] private Sprite _playerBar;
+    [SerializeField] private Sprite _enemyBar;
+
     private Character _character;
     private Transform _target;
 
@@ -22,16 +27,18 @@ public class HealthBar : MonoBehaviour
     }
 
     private void Update()
-    {
-        if (transform.position != _target.position)
-            transform.position = _target.position;
+    { 
+        transform.position = Camera.current.WorldToScreenPoint(_target.position);
     }
 
-    public void Initialize(Character character, Transform target)
+    public void Initialize(Character character, Transform target, bool isPlayer)
     {
         _character = character;
         _target = target;
         OnEnable();
+        ShowNewValue();
+
+        _bar.sprite = isPlayer ? _playerBar : _enemyBar;
     }
 
     private void ShowNewValue()
