@@ -1,5 +1,8 @@
+using AYellowpaper.SerializedCollections;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Client
 {
@@ -9,6 +12,7 @@ namespace Client
         [SerializeField] private SpellUser _enemy;
 
         [SerializeField] private SpellAnnouncer _spells;
+        [SerializeField] private Button[] _buttons;
 
         private AISpellChooser _aISpellChooser;
 
@@ -33,6 +37,9 @@ namespace Client
 
         public void StopPlayerMove()
         {
+            foreach (var button in _buttons)
+                button.interactable = false;
+
             StartEnemyMove();
         }
 
@@ -49,13 +56,15 @@ namespace Client
 
         private void StartPlayerMove()
         {
-            _spells.gameObject.SetActive(true);
+            foreach (var button in _buttons)
+            {
+                if (button.GetComponentInChildren<CooldownTimer>() == null)
+                    button.interactable = true;
+            }
         }
 
         private void StartEnemyMove()
         {
-            _spells.gameObject.SetActive(false);
-
             if (_aISpellChooser == null)
                 _aISpellChooser = _enemy.GetComponent<AISpellChooser>();
 

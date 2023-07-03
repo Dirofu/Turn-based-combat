@@ -17,8 +17,6 @@ namespace Client
 
         public Spell Spell => _spell;
 
-        public event Action OnDestroyed;
-
         private void OnEnable()
         {
             _info = GetComponentInParent<CharacterInfo>();

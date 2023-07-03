@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SpellVisual>k__BackingField: {fileID: 21300000, guid: 7d0b5fa2dc3826840b59c0012e3f29cf, type: 3}
   <Duration>k__BackingField: 0
-  <Cooldown>k__BackingField: 0
+  <Cooldown>k__BackingField: 1
   <PowerOnStep>k__BackingField: 0
   <Value>k__BackingField: 8
   <Type>k__BackingField: 0
