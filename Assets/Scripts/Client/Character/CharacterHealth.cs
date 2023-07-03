@@ -24,25 +24,28 @@ namespace Client
             _webHealth = new WebCharacterHealth();
             _webHealth.GetHealth(out _health, out _maxHealth);
 
-            _info.HealthBar.Initialize(this);
+            _info.Initialize(this);
         }
 
         public void TakeDamage(float damage)
         {
-            bool result = _webHealth.TryTakeDamage(damage);
+            _webHealth.TakeDamage(damage);
             _webHealth.GetHealth(out _health, out _maxHealth);
             HealthChanged?.Invoke();
-
-            if (result == true)
-                return;
 
             if (_health <= 0)
                 Die();
         }
 
-        private void Die()
+        public void AddHealth(float health)
         {
-            Debug.Log("Die");
+            _webHealth.AddHealth(health);
+            _webHealth.GetHealth(out _health, out _maxHealth);
+            HealthChanged?.Invoke();
         }
+
+        public void EnableBarrier(Spell spell) => _webHealth.EnableBarrier(spell.Value);
+        public void DisableBarrier() => _webHealth.DisableBarrier();
+        private void Die() => FindObjectOfType<LevelLoader>().RestartLevel();
     }
 }
