@@ -13,7 +13,6 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Sprite _enemyBar;
 
     private Character _character;
-    private Transform _target;
 
     private void OnEnable()
     {
@@ -26,15 +25,9 @@ public class HealthBar : MonoBehaviour
         _character.HealthChanged -= ShowNewValue;
     }
 
-    private void Update()
-    { 
-        transform.position = Camera.current.WorldToScreenPoint(_target.position);
-    }
-
-    public void Initialize(Character character, Transform target, bool isPlayer)
+    public void Initialize(Character character, bool isPlayer)
     {
         _character = character;
-        _target = target;
         OnEnable();
         ShowNewValue();
 

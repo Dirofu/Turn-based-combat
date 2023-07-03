@@ -4,15 +4,9 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [Header("Character Settings")]
+    [SerializeField] private HealthBar _healthBar;
     [SerializeField] private float _maxHealth;
     [SerializeField] private bool _isPlayer;
-
-    [Space(10)]
-    
-    [Header("HealthBar Settings")]
-    [SerializeField] private Transform _healthBarParent;
-    [SerializeField] private HealthBar _healthBarPrefab;
-    [SerializeField] private Transform _healthBarPosition;
 
     private float _health;
 
@@ -23,9 +17,26 @@ public class Character : MonoBehaviour
 
     private void Awake()
     {
-        HealthBar health = Instantiate(_healthBarPrefab, _healthBarParent);
-
         _health = _maxHealth;
-        health.Initialize(this, _healthBarPosition, _isPlayer);
+        _healthBar.Initialize(this, _isPlayer);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if (damage < 0)
+            return;
+
+        _health -= damage;
+
+        if (_health <= 0)
+            Die();
+
+        HealthChanged?.Invoke();
+    }
+
+    private void Die()
+    {
+        _health = 0;
+        Debug.Log("Die");
     }
 }
